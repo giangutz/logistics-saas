@@ -30,6 +30,7 @@ import { createInventory, getInventory, getInventoryByClient, getInventoryById, 
 import { createOrder, getOrders, getOrdersByClient, getOrderById, updateOrder, deleteOrder, addOrderItem, getOrderItems, removeOrderItem, calculateOrderTotal } from './handlers/orders';
 import { createDelivery, getDeliveries, getDeliveryById, getDeliveryByOrder, updateDelivery, getDeliveriesByStatus, trackDelivery } from './handlers/deliveries';
 import { getClientDashboardStats, getAdminDashboardStats, getRevenueByClient, getTotalSystemRevenue, getOrderStatusCounts, getDeliveryStatusCounts } from './handlers/dashboard';
+import { seedDatabase } from './handlers/seed';
 
 const t = initTRPC.create({
   transformer: superjson,
@@ -229,6 +230,10 @@ const appRouter = router({
   
   getDeliveryStatusCounts: publicProcedure
     .query(() => getDeliveryStatusCounts()),
+
+  // Database seeding
+  seedDatabase: publicProcedure
+    .mutation(() => seedDatabase()),
 });
 
 export type AppRouter = typeof appRouter;
